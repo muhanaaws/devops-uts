@@ -39,6 +39,7 @@ jobs:
 
       - name: Run unit tests
         run: npm test
+  # Job CD: deploy ke GitHub Pages (bisa diganti FTP/SCP)
   deploy:
     needs: build-test
     runs-on: ubuntu-latest
