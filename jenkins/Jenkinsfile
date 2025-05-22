@@ -1,0 +1,40 @@
+pipeline {
+    agent any
+
+    tools {
+        nodejs 'NodeJS 23'
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                checkout scm
+            }
+        }
+
+        stage('Install Dependencies') {
+            steps {
+                dir('jenkins') {
+                    sh 'npm install'
+                }
+            }
+        }
+
+        stage('Run Tests') {
+            steps {
+                dir('jenkins') {
+                    sh 'npm test'
+                }
+            }
+        }
+    }
+
+    post {
+        success {
+            echo '✅ Build sukses'
+        }
+        failure {
+            echo '❌ Build gagal'
+        }
+    }
+}
